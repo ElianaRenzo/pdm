@@ -1,5 +1,7 @@
 library(RSMLM)
-setwd('/Users/Eliana/Documents/PDM/GrapHiC_Codes_Eliana/2.\ Comparison\ Example/Data')
+setwd('/Users/Eliana/Documents/PDM/Codes/GrapHiC_Codes_base/2.\ Comparison\ Example/Data')
+
+ 
 
 for (r_seed in 0:49) {
   for (i in 0:13) {
