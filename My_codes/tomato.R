@@ -1,9 +1,11 @@
 library(RSMLM)
-setwd('/Users/Eliana/Documents/PDM/Codes/My_codes')
+setwd('/Users/Eliana/Documents/PDM/Codes/My_codes/Data')
 
-data <- read.csv('standard_zoom_for_tomato.csv')
+ID <- '3'
+
+data <- read.csv(paste('simulated_SMLM_', ID, '.csv', sep = ""))
 # search radius
-tomatoR <- 15
+tomatoR <- 31 # Selon juliette, mettre plutot un peu plus que 30 (triche)
 # persistence threshold
 tomatoThresh <- 6
 
@@ -30,9 +32,9 @@ print(paste('ToMATo found', numClustersTom, 'clusters in the dataset. The ground
 tomatoDiag <- tomatoDiagram(coords, tomatoR)
 plotTomatoDiagram(tomatoDiag, tomatoThresh)
 
-name <- "_test_saving_results"
+filename <- paste("tomato_result_", ID, ".csv", sep = "")
 
-#write.csv(labels, paste("tomato", name, ".csv", sep=""))
+# write.csv(labels, filename)
 
 
 
