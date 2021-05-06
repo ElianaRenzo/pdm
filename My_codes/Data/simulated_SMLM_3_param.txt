@@ -1,0 +1,2 @@
+{'x_lim': [0, 4], 'y_lim': [0, 4], 'NumberOfClusters': 40, 'LocPerCluster': 25, 'r': 30, 'IsolatedLoc': 2000, 'delta': 1, 'NumberOfScales': 1, 'cluster_shape': 'uniform'}
+# higher noise level
