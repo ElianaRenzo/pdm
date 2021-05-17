@@ -1,8 +1,8 @@
 library(RSMLM)
-setwd('/Users/Eliana/Documents/PDM/Codes/My_codes/Data')
+setwd('/Users/Eliana/Documents/PDM/tests')
 
-folder_name <- 'different_densities/'
-ID <- '4'
+folder_name <- 'standard/'
+ID <- '1'
 
 
 # search radius
@@ -10,8 +10,9 @@ tomatoR <- 31 # Selon juliette, mettre plutot un peu plus que 30 (triche)
 # persistence threshold
 tomatoThresh <- 6
 
+NumberOfSimulations <- 1
 
-for (i in 0:29) {
+for (i in 0:(NumberOfSimulations - 1)) {
   data <- read.csv(paste(folder_name, 'simulated_SMLM_', ID, '_', i, '.csv', sep = ""))
   
   detectionList <- data
@@ -39,7 +40,7 @@ for (i in 0:29) {
   
   filename <- paste("tomato_results/tomato_result_", ID, "_", i , ".csv", sep = "")
   
-  write.csv(labels, filename)
+  #write.csv(labels, filename)
 }
 
 
