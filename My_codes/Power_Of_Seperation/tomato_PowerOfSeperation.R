@@ -50,3 +50,39 @@ for (dist in distances) {
   }
 }
 
+d = 100
+
+s = 2
+
+name = paste("dist_", d, "_sim_", s, sep = "")
+data <- read.csv(paste(folder_name, name, ".csv", sep=""), header = TRUE)
+
+# search radius
+tomatoR <- 40
+# persistence threshold
+tomatoThresh <- 6
+
+print("document telecharge")
+
+detectionList <- data
+#data.xy <- subset(data, select=c("V1", "V2"))
+
+coords <- as.matrix(detectionList[, c('x', 'y')]) # CORRIGER ICI CA MARCHE PAS JE COMPRENDS PAS POURQUOI
+
+# cluster data using ToMATo
+labels <- clusterTomato(coords, tomatoR, tomatoThresh)
+#write.csv(labels, paste("tomato", name, ".csv", sep=""))
+
+# Tomato result
+plotClusterScatter(coords, labels)
+
+# GT
+plotClusterScatter(coords, detectionList$labels_1)
+
+numClustersTom <- sum(unique(labels) > 0)
+numClustersGT <- sum(unique(detectionList$labels_1) > 0)
+
+print(paste('ToMATo found', numClustersTom, 'clusters in the dataset. The ground truth number is', numClustersGT))
+
+tomatoDiag <- tomatoDiagram(coords, tomatoR)
+plotTomatoDiagram(tomatoDiag, tomatoThresh)
