@@ -1,22 +1,26 @@
 library(RSMLM)
-setwd('/Users/Eliana/Documents/PDM/tests')
+
+setwd('/Users/Eliana/Documents/PDM/Codes/My_codes/Deviations_from_standard/')
+
 
 folder_name <- 'standard/'
 ID <- '1'
 
 
 # search radius
-tomatoR <- 31 # Selon juliette, mettre plutot un peu plus que 30 (triche)
+tomatoR <- 35 # Selon juliette, mettre plutot un peu plus que 30 (triche)
 # persistence threshold
 tomatoThresh <- 6
 
-NumberOfSimulations <- 1
+NumberOfSimulations <- 30
 
 for (i in 0:(NumberOfSimulations - 1)) {
-  data <- read.csv(paste(folder_name, 'simulated_SMLM_', ID, '_', i, '.csv', sep = ""))
+  
+  filename <- paste('simulated_SMLM_', ID, '_', i, sep = "")
+  print(filename)
+  data <- read.csv(paste('Data/', folder_name, filename, '.csv', sep = ""))
   
   detectionList <- data
-  #data.xy <- subset(data, select=c("V1", "V2"))
   
   coords <- as.matrix(detectionList[, c('x', 'y')])
   
@@ -38,9 +42,9 @@ for (i in 0:(NumberOfSimulations - 1)) {
   tomatoDiag <- tomatoDiagram(coords, tomatoR)
   plotTomatoDiagram(tomatoDiag, tomatoThresh)
   
-  filename <- paste("tomato_results/tomato_result_", ID, "_", i , ".csv", sep = "")
+  filename <- paste("Tomato_analysis/tomato_result_", ID, "_", i , ".csv", sep = "")
   
-  #write.csv(labels, filename)
+  write.csv(labels, filename)
 }
 
 

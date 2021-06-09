@@ -72,15 +72,70 @@ clusterVoronoi <- function(coords, threshold, densityChoice) {
 }
 
 
-setwd('/Users/Eliana/Documents/PDM/tests')
-folder_name <- 'standard/'
+setwd('/Users/Eliana/Documents/PDM/Codes/My_codes/Deviations_from_standard/')
 
-data <- read.csv(paste(folder_name, 'simulated_SMLM_', 1, '_', 0, '.csv', sep = ""))
+folder_name <- 'standard/'
+ID <- 1
+
+NumberOfSimulations <- 30
+
+
+density_factor <- 2
+
+for (i in 0:(NumberOfSimulations - 1)) {
+
+  filename <- paste('simulated_SMLM_', ID, '_', i, sep = "")
+  print(filename)
+  data <- read.csv(paste('Data/', folder_name, filename, '.csv', sep = ""))
+    
+    detectionList <- data
+    
+    cat('simulated_SMLM_', ID, '_',  i)
+    
+    coords <- as.matrix(detectionList[, c('x', 'y')])
+    N <- dim(coords)[1]
+    
+    area <- (max(coords[,1])- min(coords[,1])) * (max(coords[,2])- min(coords[,2]))
+    mean_density <- N/area
+    res <- clusterVoronoi(coords, density_factor * mean_density, 1)
+    
+    plotClusterScatter(coords, res)
+    
+    filename <- paste("SRT_analysis/voronoi_result_", ID, "_", i , ".csv", sep = "")
+    
+    write.csv(res, filename)
+}
+plotClusterScatter(coords, res)
+
+
+
+
+# Tests pour les faire 1 à la fois. 
+data <- read.csv(paste('Data/', folder_name, 'simulated_SMLM_', 1, '_', 0, '.csv', sep = ""))
 
 detectionList <- data
 
 coords <- as.matrix(detectionList[, c('x', 'y')])
+N <- dim(coords)[1]
 
-res<- clusterVoronoi(coords, 2*0.000125, 1)
+area <- (max(coords[,1])- min(coords[,1])) * (max(coords[,2])- min(coords[,2]))
+mean_density <- N/area
+res <- clusterVoronoi(coords, 1.5*mean_density, 1)
 
 plotClusterScatter(coords, res)
+
+filename <- paste("SRT_analysis/voronoi_result_", ID, "_", i , ".csv", sep = "")
+
+write.csv(res, filename)
+
+
+
+
+
+
+
+
+
+
+
+
