@@ -4,12 +4,15 @@ setwd('/Users/Eliana/Documents/PDM/Codes/My_codes/Power_Of_Seperation')
 
 folder_name <- 'DataForTomato/'
 NumberOfRuns <- 30
-distances <- c(60, 65, 70, 75, 80, 85, 90, 95, 100, 105, 110, 115, 120)
+
+
+distances <- c(50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 105)
+
 
 # search radius
-tomatoR <- 40
+tomatoR <- 30
 # persistence threshold
-tomatoThresh <- 6
+tomatoThresh <- 5
 
 
 for (dist in distances) {
@@ -44,8 +47,8 @@ for (dist in distances) {
     tomatoDiag <- tomatoDiagram(coords, tomatoR)
     plotTomatoDiagram(tomatoDiag, tomatoThresh)
       
-    filename <- paste("tomato_results/tomato_dist_", dist, "_sim_", run, ".csv", sep = "")
-      
+    filename <- paste("tomato_analysis/tomato_dist_", dist, "_sim_", run, ".csv", sep = "")
+    
     write.csv(labels, filename)
   }
 }
