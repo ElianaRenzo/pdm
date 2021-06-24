@@ -68,7 +68,7 @@ NumberOfRuns <- 30
 
 
 # density factor - threshold for object 
-density_factor <- 0.5
+density_factor <- 0.55
 
 default_area <- (30+30) * (30+ 105 + 30)
 
@@ -94,7 +94,41 @@ for (dist in distances) {
     
     plotClusterScatter(coords, res)
   
-    filename <- paste("voronoi_analysis/denstiy_factor_05/voronoi_dist_", dist, "_sim_", run, ".csv", sep = "")
+    filename <- paste("voronoi_analysis/density_factor_055/voronoi_dist_", dist, "_sim_", run, ".csv", sep = "")
+  
+    write.csv(res, filename)
+  }
+}
+
+
+# --- Next experiment ----
+# For dist = 85, voir quel alpha est le meilleur pour tenter d'avoir une moyenne proche de 2 clusters détectés
+
+
+distance <- 85
+
+alphas <- c(0.55, 0.6, 0.65, 0.7, 0.75,  0.8, 0.85, 0.9, 0.95)
+
+
+
+for (run in 0: (NumberOfRuns - 1)) {
+  print(run)
+  name = paste("dist_", distance, "_sim_", run, sep = "")
+  data <- read.csv(paste(folder_name, name, ".csv", sep=""), header = TRUE)
+  
+  detectionList <- data
+  coords <- as.matrix(detectionList[, c('x', 'y')])
+  
+  N <- dim(coords)[1]
+  mean_density <- N/default_area
+  
+  for (alpha in alphas) {
+    
+    res <- clusterVoronoi(coords, alpha * mean_density, 1)
+  
+    plotClusterScatter(coords, res)
+  
+    filename <- paste("voronoi_analysis/gridsearch_alpha_dist85/voronoi_alpha_", (alpha * 100), "_sim_", run, ".csv", sep = "")
   
     write.csv(res, filename)
   }
