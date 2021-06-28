@@ -74,8 +74,8 @@ clusterVoronoi <- function(coords, threshold, densityChoice) {
 
 setwd('/Users/Eliana/Documents/PDM/Codes/My_codes/Deviations_from_standard/')
 
-folder_name <- 'standard/'
-ID <- 1
+folder_name <- 'non_uniform_noise/'
+ID <- 6
 
 NumberOfSimulations <- 30
 
@@ -109,9 +109,10 @@ plotClusterScatter(coords, res)
 
 
 
+folder_name = 'different_sizes/'
 
 # Tests pour les faire 1 à la fois. 
-data <- read.csv(paste('Data/', folder_name, 'simulated_SMLM_', 1, '_', 0, '.csv', sep = ""))
+data <- read.csv(paste('Data/', folder_name, 'simulated_SMLM_', 5, '_', 0, '.csv', sep = ""))
 
 detectionList <- data
 
@@ -120,7 +121,7 @@ N <- dim(coords)[1]
 
 area <- (max(coords[,1])- min(coords[,1])) * (max(coords[,2])- min(coords[,2]))
 mean_density <- N/area
-res <- clusterVoronoi(coords, 1.5*mean_density, 1)
+res <- clusterVoronoi(coords, 2*mean_density, 1)
 
 plotClusterScatter(coords, res)
 
