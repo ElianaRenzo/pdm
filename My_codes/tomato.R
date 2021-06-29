@@ -3,16 +3,17 @@ library(RSMLM)
 setwd('/Users/Eliana/Documents/PDM/Codes/My_codes/Deviations_from_standard/')
 
 
-folder_name <- 'different_sizes/'
-ID <- '5'
+folder_name <- 'high_noise/'
+ID <- '3'
 
 
 # search radius
 tomatoR <- 35 # Selon juliette, mettre plutot un peu plus que 30 (triche)
 # persistence threshold
-tomatoThresh <- 5
+tomatoThresh <- 8
 
 NumberOfSimulations <- 30
+
 
 
 
